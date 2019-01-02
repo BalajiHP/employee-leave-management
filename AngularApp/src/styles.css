@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+.navbar {
+  margin-bottom: 50px;
+}
+.name-column, .position-column{
+  min-width: 140px;
+}
+.inner-logo {
+  display: block;
+  -webkit-transition: 0.2s all;
+  -moz-transition: 0.2s all;
+  transition: 0.2s all;
+  height: 40px;
+  width: auto;
+}
+.btn-success{
+  margin-right: 10px;
+}
