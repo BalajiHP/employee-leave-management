@@ -17,9 +17,8 @@ export class EmployeeComponent implements OnInit {
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
-  this.userData();
+    this.userData();
     this.resetForm();
-    this.refreshEmployeeList();
   }
 
   resetForm(form?: NgForm) {
@@ -39,26 +38,20 @@ export class EmployeeComponent implements OnInit {
     if (form.value._id == "") {
       this.employeeService.postEmployee(form.value).subscribe((res) => {
         this.resetForm(form);
-        this.refreshEmployeeList();
         alert("Submitted succesfully");
         this.userData();
+        console.log(res);
       });
     }
     else {
       this.employeeService.putEmployee(form.value).subscribe((res) => {
         this.resetForm(form);
-        this.refreshEmployeeList();
         alert("Edited succesfully");
         this.userData();
       });
     }
   }
 
-  refreshEmployeeList() {
-    this.employeeService.getEmployeeList().subscribe((res) => {
-      this.employeeService.employees = res as Employee[];
-    });
-  }
 
   onEdit(emp: Employee) {
     this.employeeService.selectedEmployee = emp;
@@ -73,8 +66,8 @@ export class EmployeeComponent implements OnInit {
   onDelete(_id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
       this.employeeService.deleteEmployee(_id).subscribe((res) => {
-        this.refreshEmployeeList();
         this.resetForm(form);
+        this.userData();
       });
     }
   }
