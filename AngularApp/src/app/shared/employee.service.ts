@@ -7,7 +7,6 @@ import { Employee } from './employee.model';
 
 @Injectable()
 export class EmployeeService {
-  //selectedEmployee: Employee;
   employees: Employee[];
   readonly baseURL = 'http://localhost:3000/employees';
   selectedEmployee : Employee|{} = {};
@@ -16,7 +15,6 @@ export class EmployeeService {
   postEmployee(emp: Employee) {
     return this.http.post(this.baseURL, emp);
   }
-
   getEmployeeList() {
     return this.http.get(this.baseURL);
   }

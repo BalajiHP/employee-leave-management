@@ -9,28 +9,28 @@
         <div class="card">
             <div class="card-body">
               <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
-                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedEmployee._id">
+                <input type="hidden" name="_id" #_id="ngModel" [ngModel]="employeeService.selectedEmployee._id">
                 <div class="form-group">
                   <label class="col-md-9">Employee Name</label>
-                  <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.name" placeholder="Enter Full Name" required>
+                  <input type="text" class="form-control" name="name" #name="ngModel" [ngModel]="employeeService.selectedEmployee.name" placeholder="Enter Full Name" required>
                 </div>
                 <div class="form-group">
                   <label class="col-md-9">Employee Position </label>
-                  <input type="text" class="form-control" name="position" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.position" placeholder="EnterPosition" required>
+                  <input type="text" class="form-control" name="position" #name="ngModel" [ngModel]="employeeService.selectedEmployee.position" placeholder="EnterPosition" required>
                 </div>
                 <div class="form-group">
                     <label class="col-md-6">Team </label>
-                    <input type="text" class="form-control" name="designation" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.designation" placeholder="Enter Team" required>
-                  </div>
+                    <input type="text" class="form-control" name="designation" #name="ngModel" [ngModel]="employeeService.selectedEmployee.designation" placeholder="Enter Team" required>
+                </div>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-12">
                       <label class="col-md-6">Leave From </label>
-                      <input type="date" class="form-control" name="from" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.from" placeholder="Enter from date" required>
+                      <input type="date" class="form-control" name="from" #name="ngModel" [ngModel]="employeeService.selectedEmployee.from | date:'yyyy-MM-dd' " placeholder="Enter from date" required>
                     </div>
                     <div class="col-12">
                         <label class="col-md-6">Leave to </label>
-                        <input type="date" class="form-control" name="to" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.to" placeholder="Enter to date" required>
+                        <input type="date" class="form-control" name="to" #name="ngModel" [ngModel]="employeeService.selectedEmployee.to | date:'yyyy-MM-dd'" placeholder="Enter to date" required>
                     </div>
                   </div>
                 </div>
@@ -54,14 +54,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let emp of employeeService.employees">
+              <tr *ngFor="let emp of user">
                 <th class="name-column" scope="row">{{emp.name}}</th>
                 <td  class="position-column">{{emp.position}}</td>
                 <td>{{emp.designation}}</td>
-                <td class="date-column">{{emp.from}} to {{emp.to}}</td>
+                <td class="date-column">{{emp.from | date}} to {{emp.to | date}}</td>
                 <td>
                   <a (click)="onEdit(emp)" href="javascript:void(0)"><i class="fas fa-pen-fancy"></i></a>
-
+                  /
                   <a (click)="onDelete(emp._id,employeeForm)" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>
                 </td>
               </tr>

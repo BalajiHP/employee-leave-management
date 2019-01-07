@@ -11,10 +11,13 @@ import { Employee } from '../shared/employee.model';
   providers: [EmployeeService]
 })
 export class EmployeeComponent implements OnInit {
+  
+  user;
 
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
+  this.userData();
     this.resetForm();
     this.refreshEmployeeList();
   }
@@ -38,13 +41,15 @@ export class EmployeeComponent implements OnInit {
         this.resetForm(form);
         this.refreshEmployeeList();
         alert("Submitted succesfully");
+        this.userData();
       });
     }
     else {
       this.employeeService.putEmployee(form.value).subscribe((res) => {
         this.resetForm(form);
         this.refreshEmployeeList();
-        alert("Submitted succesfully");
+        alert("Edited succesfully");
+        this.userData();
       });
     }
   }
@@ -57,6 +62,12 @@ export class EmployeeComponent implements OnInit {
 
   onEdit(emp: Employee) {
     this.employeeService.selectedEmployee = emp;
+  }
+
+  userData(){
+    this.employeeService.getEmployeeList().subscribe((res) => {
+      this.user = res;
+    });
   }
 
   onDelete(_id: string, form: NgForm) {
