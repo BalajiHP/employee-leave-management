@@ -47,6 +47,7 @@ export class EmployeeComponent implements OnInit {
       this.employeeService.putEmployee(form.value).subscribe((res) => {
         this.resetForm(form);
         alert("Edited succesfully");
+        
         this.userData();
       });
     }

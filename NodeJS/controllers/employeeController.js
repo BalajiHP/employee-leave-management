@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
     emp.save((err, doc) => {
         if (!err) { res.send(doc); }
         else { console.log('Error in Employee Save :' + JSON.stringify(err, undefined, 2)); }
-    });
+    }); 
 });
 
 router.put('/:id', (req, res) => {

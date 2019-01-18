@@ -6,3 +6,11 @@ export class Employee {
     from: Date;
     to: Date;
 }
+
+export class UserDetails {
+    _id: string;
+    username: string;
+    email: string;
+    password: string;
+    cpass: string;
+}
