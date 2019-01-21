@@ -7,7 +7,7 @@ export class Employee {
     to: Date;
 }
 
-export class UserDetails {
+export class User {
     _id: string;
     username: string;
     email: string;

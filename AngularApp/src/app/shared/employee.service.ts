@@ -5,6 +5,8 @@ import { catchError, tap, map } from 'rxjs/operators';
 
 import { Employee } from './employee.model';
 
+
+
 @Injectable()
 export class EmployeeService {
   employees: Employee[];
@@ -25,5 +27,18 @@ export class EmployeeService {
 
   deleteEmployee(_id: string) {
     return this.http.delete(this.baseURL + `/${_id}`);
+  }
+}
+
+@Injectable()
+export class UserService{
+  
+  constructor(private _http:HttpClient) { }
+
+  register(body:any){
+  return this._http.post('http://127.0.0.1:3000/user/register', body,{
+    observe:'body',
+    headers:new HttpHeaders().append('Content-Type','application/json')
+  });
   }
 }
