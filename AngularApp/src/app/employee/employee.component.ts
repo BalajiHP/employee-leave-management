@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
 import { EmployeeService } from '../shared/employee.service';
+import { UserService } from '../shared/employee.service';
 import { Employee } from '../shared/employee.model';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-employee',
@@ -12,13 +14,27 @@ import { Employee } from '../shared/employee.model';
 })
 export class EmployeeComponent implements OnInit {
   
-  user;
+  empl;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private _userservice: UserService, private _router:Router) {
+    this._userservice.user()
+    .subscribe(
+      data=>console.log(data),
+      error=>this._router.navigate(['/login'])
+      )
+  }
 
   ngOnInit() {
     this.userData();
     this.resetForm();
+  }
+
+  logout(){
+    this._userservice.logout()
+    .subscribe(
+      data=>{console.log(data);this._router.navigate(['/login'])},
+      error=>console.error(error)
+      )
   }
 
   resetForm(form?: NgForm) {
@@ -60,7 +76,7 @@ export class EmployeeComponent implements OnInit {
 
   userData(){
     this.employeeService.getEmployeeList().subscribe((res) => {
-      this.user = res;
+      this.empl = res;
     });
   }
 

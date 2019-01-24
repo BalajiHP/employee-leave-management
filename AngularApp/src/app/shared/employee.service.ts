@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
-
 import { Employee } from './employee.model';
-
-
 
 @Injectable()
 export class EmployeeService {
@@ -32,7 +29,6 @@ export class EmployeeService {
 
 @Injectable()
 export class UserService{
-  
   constructor(private _http:HttpClient) { }
 
   register(body:any){
@@ -41,4 +37,28 @@ export class UserService{
     headers:new HttpHeaders().append('Content-Type','application/json')
   });
   }
+
+  login(body:any){
+  return this._http.post('http://127.0.0.1:3000/user/login', body,{
+    observe:'body',
+    withCredentials:true,
+    headers:new HttpHeaders().append('Content-Type','application/json')
+  });
+  }
+  user(){
+    return this._http.get('http://127.0.0.1:3000/employees', {
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+
+  logout(){
+    return this._http.get('http://127.0.0.1:3000/user/logout', {
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+
 }

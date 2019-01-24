@@ -13,7 +13,7 @@ schema.statics.hashPassword = function hashPassword(password){
 	return bcrypt.hashSync(password,10); 
 }
 
-schema.method.isValid = function(hashedpassword){
+schema.methods.isValid = function(hashedpassword){
 	return bcrypt.compareSync(hashedpassword, this.password);
 }
 

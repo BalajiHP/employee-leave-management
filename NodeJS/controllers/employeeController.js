@@ -1,18 +1,18 @@
 const express = require('express');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
-
 var { Employee } = require('../models/employee');
-
+var User = require('../models/user');
+var passport = require('passport');
 // => localhost:3000/employees/
-router.get('/', (req, res) => {
+router.get('/', (req,res,next) => {
     Employee.find((err, docs) => {
         if (!err) { res.send(docs); }
         else { console.log('Error in Retriving Employees :' + JSON.stringify(err, undefined, 2)); }
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req,res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No record with given id : ${req.params.id}`);
 
@@ -21,6 +21,7 @@ router.get('/:id', (req, res) => {
         else { console.log('Error in Retriving Employee :' + JSON.stringify(err, undefined, 2)); }
     });
 });
+
 
 router.post('/', (req, res) => {
     var emp = new Employee({

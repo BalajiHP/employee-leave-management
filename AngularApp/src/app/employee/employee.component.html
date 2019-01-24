@@ -1,4 +1,5 @@
 <div class="container">
+  <div class="row"><a href="" (click)="logout()">logout</a></div>
   <div class="row">
     <div class="col-md-4">
         <div class="card">
@@ -49,7 +50,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let emp of user">
+              <tr *ngFor="let emp of empl">
                 <th class="name-column" scope="row">{{emp.name}}</th>
                 <td  class="position-column">{{emp.position}}</td>
                 <td>{{emp.designation}}</td>
