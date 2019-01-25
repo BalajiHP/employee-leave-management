@@ -5,13 +5,17 @@ var { Employee } = require('../models/employee');
 var User = require('../models/user');
 var passport = require('passport');
 // => localhost:3000/employees/
-router.get('/', (req,res,next) => {
+router.get('/',isValidUser, (req,res,next) => {
     Employee.find((err, docs) => {
         if (!err) { res.send(docs); }
         else { console.log('Error in Retriving Employees :' + JSON.stringify(err, undefined, 2)); }
     });
 });
 
+function isValidUser(req,res,next){
+    if (req.isAuthenticated()) next();
+    else return res.status(401).json({message:'Unauthorized Request'}); 
+}
 router.get('/:id', (req,res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No record with given id : ${req.params.id}`);
